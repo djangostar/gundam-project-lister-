@@ -21,13 +21,41 @@ function UserProvider({ children }) {
       }
     });
   }, []);
+  
+  // useEffect(() => {
+  //   // fetch all gundams
+  //   fetch('/gundams')
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       setGundams(data);
+  //     });
+  // }, []);
+
+
+  const login = (user) => {
+    setUser(user);
+    setIsLoggedIn(true);
+  };
+
+  const logout = () => {
+    setUser({});
+    setIsLoggedIn(false);
+  };
+
+  const ctxSetUserAndLogin = (user) => {
+    setUser(user);
+    setIsLoggedIn(true);
+  };
 
   return (
     <UserContext.Provider
       value={{
         user,
         errors,
-        isLoggedIn
+        isLoggedIn,
+        login,
+        logout,
+        ctxSetUserAndLogin
       }}
     >
       {children}
