@@ -8,6 +8,20 @@ function UserProvider({ children }) {
   const [errors, setErrors] = useState([])
   const [isLoggedIn, setIsLoggedIn] = useState(false)
 
+  useEffect(() => {
+    // session
+    fetch('/me').then((resp) => {
+      if (resp.ok) {
+        resp.json().then((data) => {
+          setUser(data);
+          data.error ? setIsLoggedIn(false) : setIsLoggedIn(true);
+        });
+      } else {
+        resp.json().then((data) => setErrors(data.error));
+      }
+    });
+  }, []);
+
   return (
     <UserContext.Provider
       value={{
