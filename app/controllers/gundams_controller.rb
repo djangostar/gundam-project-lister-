@@ -1,6 +1,8 @@
 class GundamsController < ApplicationController
   
   def index
+    gundams = Gundam.all 
+    render jsong: gundams
   end
   
   def create
@@ -10,5 +12,11 @@ class GundamsController < ApplicationController
   end
 
   def destroy
+  end
+
+  private
+
+  def gundam_params
+    params.permit(:name, :model_series, :grade, :year, :img_url)
   end
 end

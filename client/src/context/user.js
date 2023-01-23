@@ -22,14 +22,14 @@ function UserProvider({ children }) {
     });
   }, []);
   
-  // useEffect(() => {
-  //   // fetch all gundams
-  //   fetch('/gundams')
-  //     .then((res) => res.json())
-  //     .then((data) => {
-  //       setGundams(data);
-  //     });
-  // }, []);
+  useEffect(() => {
+    // fetch all gundams
+    fetch('/gundams')
+      .then((res) => res.json())
+      .then((data) => {
+        setGundams(data);
+      });
+  }, []);
 
 
   const login = (user) => {
@@ -51,6 +51,7 @@ function UserProvider({ children }) {
     <UserContext.Provider
       value={{
         user,
+        gundams,
         errors,
         isLoggedIn,
         login,
