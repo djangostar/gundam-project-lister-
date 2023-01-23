@@ -2,7 +2,7 @@ class GundamsController < ApplicationController
   
   def index
     gundams = Gundam.all 
-    render jsong: gundams
+    render json: gundams
   end
   
   def create

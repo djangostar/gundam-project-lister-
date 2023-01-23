@@ -4,9 +4,9 @@ const UserContext = React.createContext();
 
 function UserProvider({ children }) {
   const [user, setUser] = useState({});
-  const [gundams, setGundams] = useState([])
-  const [errors, setErrors] = useState([])
-  const [isLoggedIn, setIsLoggedIn] = useState(false)
+  const [gundams, setGundams] = useState([]);
+  const [errors, setErrors] = useState([]);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
     // session
@@ -21,7 +21,7 @@ function UserProvider({ children }) {
       }
     });
   }, []);
-  
+
   useEffect(() => {
     // fetch all gundams
     fetch('/gundams')
@@ -30,8 +30,7 @@ function UserProvider({ children }) {
         setGundams(data);
       });
   }, []);
-
-
+  
   const login = (user) => {
     setUser(user);
     setIsLoggedIn(true);
@@ -56,11 +55,11 @@ function UserProvider({ children }) {
         isLoggedIn,
         login,
         logout,
-        ctxSetUserAndLogin
+        ctxSetUserAndLogin,
       }}
     >
       {children}
     </UserContext.Provider>
-  )
+  );
 }
 export { UserContext, UserProvider };
