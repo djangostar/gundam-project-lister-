@@ -2,7 +2,6 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const GundamCard = ({ gundam }) => {
-
   const navigate = useNavigate();
 
   return (

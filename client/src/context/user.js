@@ -5,6 +5,7 @@ const UserContext = React.createContext();
 function UserProvider({ children }) {
   const [user, setUser] = useState({});
   const [gundams, setGundams] = useState([]);
+  const [purchases, setPurchases] = useState([])
   const [errors, setErrors] = useState([]);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
@@ -14,6 +15,7 @@ function UserProvider({ children }) {
       if (resp.ok) {
         resp.json().then((data) => {
           setUser(data);
+          // fetchPurchases()
           data.error ? setIsLoggedIn(false) : setIsLoggedIn(true);
         });
       } else {
@@ -30,6 +32,14 @@ function UserProvider({ children }) {
         setGundams(data);
       });
   }, []);
+
+  // const fetchPurchases = () => {
+  //   fetch('/purchases')
+  //   .then(res => res.json())
+  //   .then( data => {
+  //     setPurchases(data)
+  //   })
+  // }
   
   const login = (user) => {
     setUser(user);
@@ -46,16 +56,47 @@ function UserProvider({ children }) {
     setIsLoggedIn(true);
   };
 
+  const addGundam = (gundam) => {
+    fetch('/gundams', {
+      method: 'POST',
+      headers: { 
+        'Content-Type': 'application/json', 
+      },
+      body: JSON.stringify(gundam)
+    })
+    .then(res => res.json())
+    .then(data => {
+      setGundams([...gundams, data])
+    })
+  }
+
+  const purchaseGundam = (purchase) => {
+    fetch('/purchases', {
+      method: 'POST',
+      headers: { 
+        'Content-Type': 'application/json', 
+      },
+      body: JSON.stringify(purchase)
+    })
+    .then(res => res.json())
+    .then(data => {
+      setPurchases([...purchases, data])
+    })
+  }
+
   return (
     <UserContext.Provider
       value={{
         user,
         gundams,
+        purchases,
         errors,
         isLoggedIn,
         login,
         logout,
         ctxSetUserAndLogin,
+        addGundam,
+        purchaseGundam,
       }}
     >
       {children}
