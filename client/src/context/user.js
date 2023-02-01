@@ -81,8 +81,13 @@ function UserProvider({ children }) {
     .then(res => res.json())
     .then(data => {
       setPurchases([...purchases, data])
+      // use the gundam_id to find the gundam it was purchased on. 
+      // updated purchases = [...gundam.purchases, data];
+      // const updatedGundam = {...gundam, purchases: updated purchases};
+      // go through all the gundams, if same gundam, replace, otherwise not.  
     })
   }
+
 
   return (
     <UserContext.Provider

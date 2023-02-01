@@ -7,18 +7,18 @@ const ReviewForm = () => {
 
   const navigate = useNavigate();
 
-  const { gundam_id } = useParams()
+  const params = useParams()
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
     const data = Object.fromEntries(formData.entries());
     const payload = {
-      input: data.input,
-      gundam_id: gundam_id,
+      price: data.input,
+      gundam_id: params.id,
     };
     purchaseGundam(payload);
-    navigate('/');
+    navigate('/gundams/:gundam_id/purchases');
     console.log(payload);
   };
 
