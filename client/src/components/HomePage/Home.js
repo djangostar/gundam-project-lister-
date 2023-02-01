@@ -1,19 +1,18 @@
 import React, { useContext } from 'react';
 import { UserContext } from '../../context/user';
-import MyGundams from '../Gundams/MyGundams';
+import PurchaseList from '../Purchases/PurchaseList'
 
 const Home = () => {
-  const { user, isLoggedIn, purchases } = useContext(UserContext);
+  const { user, isLoggedIn } = useContext(UserContext);
 
-  // useEffect(() => {
-  //   console.log({ user, isLoggedIn });
-  // }, [isLoggedIn, user]);
+//  useEffect(() => {
+ //  console.log(user, isLoggedIn );
+ //}, [user, isLoggedIn]);
 
-  const purchaseCards = purchases.map(purchase => <MyGundams key={purchase.id} purchase={purchase} gundam={purchase.gundam}/>)
   const loggedInDisplay = (
     <div>
-      <h1>{user.username}'s Page</h1>
-      { purchaseCards }
+      <h1>{user && user.username}'s Page</h1>
+      <PurchaseList />
     </div>
   );
 

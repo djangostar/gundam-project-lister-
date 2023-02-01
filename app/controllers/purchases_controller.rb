@@ -19,9 +19,9 @@ class PurchasesController < ApplicationController
 
   # GET /purchases/:id
   def show
-    purchase = current_user.commands.find_by(id: params[:id])
+    purchase = current_user.purchases.find_by(id: params[:id])
     if purchase
-      render json: purchase
+      render json: purchase, status: :ok
     else
       render json: { error: 'No such purchase'}, status: :unathorized
     end
@@ -30,6 +30,10 @@ class PurchasesController < ApplicationController
   private 
 
   def purchase_params
-    params.permit(:price, :gundam_id)
+    params.permit(:price, :gundam_id, :user_id )
   end
+
+  # def view_params
+  #   params.permit(:user_id)
+  # end
 end

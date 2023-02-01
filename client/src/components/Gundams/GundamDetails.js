@@ -5,9 +5,9 @@ import PurchaseGundam from '../Forms/PurchaseGundam'
 
 const GundamDetails = () => {
   const { gundams } = useContext(UserContext);
-  const params = useParams();
+  const {gundam_id} = useParams();
 
-  const gundam = gundams.find((g) => `${g.id}` === params.id);
+  const gundam = gundams.find((g) => `${g.id}` === gundam_id);
 
   if (gundam) {
     return (

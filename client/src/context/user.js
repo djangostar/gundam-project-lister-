@@ -5,9 +5,13 @@ const UserContext = React.createContext();
 function UserProvider({ children }) {
   const [user, setUser] = useState({});
   const [gundams, setGundams] = useState([]);
-  const [purchases, setPurchases] = useState([])
+  const [purchases, setPurchases] = useState();
   const [errors, setErrors] = useState([]);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    console.log(user)
+  }, [user])
 
   useEffect(() => {
     // session
@@ -31,16 +35,13 @@ function UserProvider({ children }) {
       .then((data) => {
         setGundams(data);
       });
+    fetch(`/purchases/${user.id}`)
+      .then((res) => res.json())
+      .then((data) => {
+        setPurchases(data);
+      });
   }, []);
 
-  // const fetchPurchases = () => {
-  //   fetch('/purchases')
-  //   .then(res => res.json())
-  //   .then( data => {
-  //     setPurchases(data)
-  //   })
-  // }
-  
   const login = (user) => {
     setUser(user);
     setIsLoggedIn(true);
@@ -59,35 +60,35 @@ function UserProvider({ children }) {
   const addGundam = (gundam) => {
     fetch('/gundams', {
       method: 'POST',
-      headers: { 
-        'Content-Type': 'application/json', 
+      headers: {
+        'Content-Type': 'application/json',
       },
-      body: JSON.stringify(gundam)
+      body: JSON.stringify(gundam),
     })
-    .then(res => res.json())
-    .then(data => {
-      setGundams([...gundams, data])
-    })
-  }
+      .then((res) => res.json())
+      .then((data) => {
+        setGundams([...gundams, data]);
+      });
+  };
 
   const purchaseGundam = (purchase) => {
     fetch('/purchases', {
       method: 'POST',
-      headers: { 
-        'Content-Type': 'application/json', 
+      headers: {
+        'Content-Type': 'application/json',
       },
-      body: JSON.stringify(purchase)
+      body: JSON.stringify(purchase),
     })
-    .then(res => res.json())
-    .then(data => {
-      setPurchases([...purchases, data])
-      // use the gundam_id to find the gundam it was purchased on. 
-      // updated purchases = [...gundam.purchases, data];
-      // const updatedGundam = {...gundam, purchases: updated purchases};
-      // go through all the gundams, if same gundam, replace, otherwise not.  
-    })
-  }
-
+      .then((res) => res.json())
+      .then((data) => {
+        purchases[0] &&
+        setPurchases([...purchases, data]);
+        // use the gundam_id to find the gundam it was purchased on.
+        // updated purchases = [...gundam.purchases, data];
+        // const updatedGundam = {...gundam, purchases: updated purchases};
+        // go through all the gundams, if same gundam, replace, otherwise not.
+      });
+  };
 
   return (
     <UserContext.Provider
