@@ -17,7 +17,6 @@ const HeroForm = () => {
       img_url: data.img_url
     }
     addGundam(payload)
-    console.log(payload)
   }
 
   return (
