@@ -10,7 +10,7 @@ import GundamForm from './components/Forms/GundamForm';
 import PurchaseForm from './components/Forms/PurchaseGundam';
 import GundamList from './components/Gundams/GundamList';
 import GundamDetails from './components/Gundams/GundamDetails';
-import PurchaseList from './components/Purchases/PurchaseList';
+// import PurchaseList from './components/Purchases/PurchaseList';
 
 function App() {
   return (

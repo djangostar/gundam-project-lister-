@@ -5,13 +5,21 @@ const UserContext = React.createContext();
 function UserProvider({ children }) {
   const [user, setUser] = useState({});
   const [gundams, setGundams] = useState([]);
-  const [purchases, setPurchases] = useState();
+  const [purchases, setPurchases] = useState([]);
   const [errors, setErrors] = useState([]);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
-    console.log(user)
-  }, [user])
+    if (user.id) {
+      // change this to a try catch block and use async await
+      fetch(`/purchases/${user.id}`)
+        .then((res) => res.json())
+        .then((data) => {
+          setPurchases(data);
+        });
+        console.log(purchases)
+    }
+  }, [user]);
 
   useEffect(() => {
     // session
@@ -34,11 +42,6 @@ function UserProvider({ children }) {
       .then((res) => res.json())
       .then((data) => {
         setGundams(data);
-      });
-    fetch(`/purchases/${user.id}`)
-      .then((res) => res.json())
-      .then((data) => {
-        setPurchases(data);
       });
   }, []);
 
@@ -81,8 +84,7 @@ function UserProvider({ children }) {
     })
       .then((res) => res.json())
       .then((data) => {
-        purchases[0] &&
-        setPurchases([...purchases, data]);
+        purchases[0] && setPurchases([...purchases, data]);
         // use the gundam_id to find the gundam it was purchased on.
         // updated purchases = [...gundam.purchases, data];
         // const updatedGundam = {...gundam, purchases: updated purchases};

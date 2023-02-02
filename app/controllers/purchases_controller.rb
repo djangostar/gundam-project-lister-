@@ -4,7 +4,7 @@ class PurchasesController < ApplicationController
   # GET /purchases
   def index
     purchases = current_user.purchases
-    render json: purchases
+    render json: purchases, status: :ok
   end
 
   # POST /purchases  
@@ -19,11 +19,11 @@ class PurchasesController < ApplicationController
 
   # GET /purchases/:id
   def show
-    purchase = current_user.purchases.find_by(id: params[:id])
-    if purchase
-      render json: purchase, status: :ok
+    purchases = Purchase.where(user_id: params[:id])
+    if purchases
+    render json: purchases, status: :ok
     else
-      render json: { error: 'No such purchase'}, status: :unathorized
+      render json: { errors: "Purchase not found" }, status: :not_found
     end
   end
 
