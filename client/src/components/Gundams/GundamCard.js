@@ -1,8 +1,23 @@
-import React from 'react';
+import React, { useContext }from 'react';
+import { UserContext } from '../../context/user'
 import { useNavigate } from 'react-router-dom';
 
 const GundamCard = ({ gundam }) => {
+  const { deleteGundam } = useContext(UserContext)
+
   const navigate = useNavigate();
+
+  const destroyGundam = (id) => {
+    fetch(`/gundams/${id}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+    }).then(res => res.json())
+    .then(data => {
+      deleteGundam(data)
+    })
+  }
 
   return (
     <div
@@ -30,6 +45,9 @@ const GundamCard = ({ gundam }) => {
         <br />
         <button onClick={() => navigate(`/gundams/${gundam.id}`)}>
             Gundam Details
+        </button>
+        <button onClick={() => destroyGundam(gundam.id)}>
+            Delete Gundam
         </button>
       </div>
     </div>

@@ -20,8 +20,8 @@ class GundamsController < ApplicationController
 
   # PATCH/PUT /gundams/1
   def update
-    gundam = Gundam.find_by(id: params[:id])
-    gundam.update(gundam_params)
+    gundam = Gundam.find(id: params[:id])
+    gundam.update!(gundam_params)
     render json: gundam, status: :accepted
   end
 

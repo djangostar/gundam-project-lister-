@@ -117,6 +117,11 @@ function UserProvider({ children }) {
     })
   })
 
+  const deleteGundam = (id) => {
+    const updatedGundams = gundams.filter(gundam => gundam.id !== id)
+    setGundams(updatedGundams)
+  }
+  
   return (
     <UserContext.Provider
       value={{
@@ -130,7 +135,8 @@ function UserProvider({ children }) {
         ctxSetUserAndLogin,
         addGundam,
         purchaseGundam,
-        updateGundam
+        updateGundam,
+        deleteGundam
       }}
     >
       {children}
