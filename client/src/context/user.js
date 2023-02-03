@@ -92,6 +92,31 @@ function UserProvider({ children }) {
       });
   };
 
+  const updateGundam = (gundam) => {
+    fetch(`/gundams/${gundam.id}`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(gundam),
+    })
+    .then(res => {
+      if (res.ok){
+        res.json().then(patchGundam)
+      }
+    })
+  }
+
+  const patchGundam = (patchedGundam) => setGundams(currentG => {
+    return currentG.map(gundam => {
+      if(gundam.id === patchedGundam.id){
+        return patchedGundam
+      } else {
+        return gundam
+      }
+    })
+  })
+
   return (
     <UserContext.Provider
       value={{
@@ -105,6 +130,7 @@ function UserProvider({ children }) {
         ctxSetUserAndLogin,
         addGundam,
         purchaseGundam,
+        updateGundam
       }}
     >
       {children}

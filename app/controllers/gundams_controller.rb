@@ -1,5 +1,5 @@
 class GundamsController < ApplicationController
-  
+ 
   # GET /gundams
   def index
     gundams = Gundam.all 

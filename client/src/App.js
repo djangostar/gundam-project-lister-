@@ -10,7 +10,7 @@ import GundamForm from './components/Forms/GundamForm';
 import PurchaseForm from './components/Forms/PurchaseGundam';
 import GundamList from './components/Gundams/GundamList';
 import GundamDetails from './components/Gundams/GundamDetails';
-// import PurchaseList from './components/Purchases/PurchaseList';
+import EditGundam from './components/Gundams/EditGundam'
 
 function App() {
   return (
@@ -22,10 +22,10 @@ function App() {
           <Route path='/signup' element={<Signup />} />
           <Route path='/login' element={<Login />} />
           <Route path='/purchases/new' element={<PurchaseForm />} />
-          {/* <Route path='/gundams/:gundam_id/purchases' element={<PurchaseList />} /> */}
           <Route path='/gundams/new' element={<GundamForm />} />
           <Route path='/gundams' element={<GundamList />} />
           <Route path='/gundams/:gundam_id' element={<GundamDetails />} />
+          <Route path='/gundams/:gundam_id/edit' element={<EditGundam />} />
         </Routes>
       </UserProvider>
     </div>

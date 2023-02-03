@@ -1,9 +1,12 @@
 import React, { useContext } from 'react'
 import { UserContext } from '../../context/user'
+import { useNavigate, useParams } from 'react-router-dom';
 
-const GundamForm = () => {
+const EditGundam = () => {
 
-  const { addGundam } = useContext(UserContext)
+  const { updateGundam } = useContext(UserContext)
+  const navigate = useNavigate()
+  const params =  useParams()
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -16,7 +19,8 @@ const GundamForm = () => {
       year: data.year,
       img_url: data.img_url
     }
-    addGundam(payload)
+    updateGundam(payload)
+    navigate(`/gundams/${params.id}`)
   }
 
   return (
@@ -57,10 +61,10 @@ const GundamForm = () => {
               id='img_url'
             />
         </div>
-        <input type='submit' value='Add Gundam!' />
+        <input type='submit' value='Edit Gundam!' />
       </form>
     </div>
   )
 }
 
-export default GundamForm
+export default EditGundam

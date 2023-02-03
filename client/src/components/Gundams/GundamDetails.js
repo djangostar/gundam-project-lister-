@@ -1,11 +1,12 @@
 import React, { useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import { UserContext } from '../../context/user';
-import PurchaseGundam from '../Forms/PurchaseGundam'
+import PurchaseGundam from '../Forms/PurchaseGundam';
+import EditGundam from '../Gundams/EditGundam';
 
 const GundamDetails = () => {
   const { gundams } = useContext(UserContext);
-  const {gundam_id} = useParams();
+  const { gundam_id } = useParams();
 
   const gundam = gundams.find((g) => `${g.id}` === gundam_id);
 
@@ -18,13 +19,14 @@ const GundamDetails = () => {
         <h4>Grade: {gundam.grade}</h4>
         <h4>Year: {gundam.year}</h4>
         <img src={gundam.img_url} alt='Gundam' />
-        <br/>
+        <br />
         <PurchaseGundam />
+        <EditGundam />
       </div>
     );
   } else {
     return <h2>Not Authorized</h2>;
   }
-}
+};
 
 export default GundamDetails;
