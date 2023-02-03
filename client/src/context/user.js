@@ -100,22 +100,22 @@ function UserProvider({ children }) {
       },
       body: JSON.stringify(gundam),
     })
-    .then(res => {
-      if (res.ok){
-        res.json().then(patchGundam)
-      }
-    })
+      .then((res) => res.json())
+      .then((data) => {
+        patchGundam(data);
+      });
   }
 
-  const patchGundam = (patchedGundam) => setGundams(currentG => {
-    return currentG.map(gundam => {
-      if(gundam.id === patchedGundam.id){
+  const patchGundam = (patchedGundam) => {
+    const updateGundams = gundams.map(gundam => {
+      if (gundam.id === patchedGundam.id) {
         return patchedGundam
       } else {
         return gundam
       }
     })
-  })
+    setGundams(updateGundams)
+  }
 
   const deleteGundam = (id) => {
     const updatedGundams = gundams.filter(gundam => gundam.id !== id)

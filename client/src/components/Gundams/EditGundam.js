@@ -3,7 +3,6 @@ import { UserContext } from '../../context/user'
 import { useNavigate, useParams } from 'react-router-dom';
 
 const EditGundam = () => {
-
   const { updateGundam } = useContext(UserContext)
   const navigate = useNavigate()
   const params =  useParams()
@@ -13,14 +12,16 @@ const EditGundam = () => {
     const formData = new FormData(e.target)
     const data = Object.fromEntries(formData.entries())
     const payload = {
+      id: params.gundam_id,
       name: data.name,
       model_series: data.model_series,
       grade: data.grade,
       year: data.year,
       img_url: data.img_url
     }
+    // console.log(params)
     updateGundam(payload)
-    navigate(`/gundams/${params.id}`)
+    navigate(`/gundams/${params.gundam_id}`)
   }
 
   return (
@@ -50,7 +51,7 @@ const EditGundam = () => {
             /> <br />
             <label>Year: </label>
             <input
-              type='integer'
+              type='number'
               name='year'
               id='year'
             /> < br />

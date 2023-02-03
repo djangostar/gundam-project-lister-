@@ -46,7 +46,7 @@ const GundamForm = () => {
             /> <br />
             <label>Year: </label>
             <input
-              type='integer'
+              type='number'
               name='year'
               id='year'
             /> < br />

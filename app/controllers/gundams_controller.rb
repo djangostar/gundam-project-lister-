@@ -20,16 +20,15 @@ class GundamsController < ApplicationController
 
   # PATCH/PUT /gundams/1
   def update
-    gundam = Gundam.find(id: params[:id])
-    gundam.update!(gundam_params)
-    render json: gundam, status: :accepted
+    gundam = Gundam.where(id: params[:id])
+    gundam.update(gundam_params)
+    render json: gundam
   end
 
   # DELETE /gundams/1
   def destroy
     gundam = Gundam.find_by(id: params[:id])
     gundam.destroy
-    head :no_content
   end
 
   private

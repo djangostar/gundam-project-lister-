@@ -1,6 +1,7 @@
 import React from 'react';
 
 const PurchaseCard = ({ purchase, gundam }) => {
+  
   return (
     <div
       style={{
@@ -23,7 +24,7 @@ const PurchaseCard = ({ purchase, gundam }) => {
         }}
       >
         {gundam && gundam.name}
-        <img src={gundam.img_url} alt='gundam_pic' />
+        <img src={gundam && gundam.img_url} alt='gundam_pic' />
         {purchase.price}
         <br />
       </div>
