@@ -53,7 +53,7 @@ const GundamCard = ({ gundam }) => {
         }}
       >
         {gundam.name}
-        <img src={gundam.img_url} alt="gundam_pic" />
+        <img src={gundam && gundam.img_url} alt="gundam_pic" />
         <br />
         <button onClick={() => navigate(`/gundams/${gundam.id}`)}>
           Gundam Details
