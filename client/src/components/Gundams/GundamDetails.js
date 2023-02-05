@@ -2,7 +2,6 @@ import React, { useContext, useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { UserContext } from '../../context/user';
 import PurchaseGundam from '../Forms/PurchaseGundam';
-import EditGundam from '../Gundams/EditGundam';
 
 const GundamDetails = () => {
   const { gundams } = useContext(UserContext);
@@ -26,7 +25,6 @@ const GundamDetails = () => {
         <img src={thisGundam.img_url} alt='Gundam' />
         <br />
         <PurchaseGundam />
-        <EditGundam />
       </div>
     );
   } else {

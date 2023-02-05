@@ -27,6 +27,17 @@ class PurchasesController < ApplicationController
     end
   end
 
+  def update
+    purchase = Purchase.where(id: params[:id])
+    purchase.update(purchase_params)
+    render json: purchase
+  end
+
+  def destroy
+    purchase = Purchase.find_by(id: params[:id])
+    purchase.destroy
+  end
+
   def test
     puts 'test'
   end

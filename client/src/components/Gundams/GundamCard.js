@@ -1,33 +1,33 @@
-import React, { useContext } from 'react';
-import { UserContext } from '../../context/user';
+import React from 'react';
+// import { UserContext } from '../../context/user';
 import { useNavigate } from 'react-router-dom';
 
 const GundamCard = ({ gundam }) => {
-  const { deleteGundam } = useContext(UserContext);
+  // const { deleteGundam } = useContext(UserContext);
 
   const navigate = useNavigate();
 
-  const destroyGundam = (id) => {
-    fetch(`/gundams/${id}`, {
-      method: 'DELETE',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
-      .then((res) => {
-        if (!res.ok) {
-          throw new Error(res.statusText);
-        }
-        return res.json();
-      })
-      .then((data) => {
-        console.log(data);
-        deleteGundam(id);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  };
+  // const destroyGundam = (id) => {
+  //   fetch(`/gundams/${id}`, {
+  //     method: 'DELETE',
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //     },
+  //   })
+  //     .then((res) => {
+  //       if (!res.ok) {
+  //         throw new Error(res.statusText);
+  //       }
+  //       return res.json();
+  //     })
+  //     .then((data) => {
+  //       console.log(data);
+  //       deleteGundam(id);
+  //     })
+  //     .catch((error) => {
+  //       console.error(error);
+  //     });
+  // };
 
  
 
@@ -58,7 +58,7 @@ const GundamCard = ({ gundam }) => {
         <button onClick={() => navigate(`/gundams/${gundam.id}`)}>
           Gundam Details
         </button>
-        <button onClick={() => destroyGundam(gundam.id)}>Delete Gundam</button>
+        {/* <button onClick={() => destroyGundam(gundam.id)}>Delete Gundam</button> */}
       </div>
     </div>
   );
