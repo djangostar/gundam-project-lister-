@@ -1,4 +1,5 @@
 class GundamsController < ApplicationController
+  before_action :authorize_user
  
   # GET /gundams
   def index

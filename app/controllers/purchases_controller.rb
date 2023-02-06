@@ -1,5 +1,5 @@
 class PurchasesController < ApplicationController
-  before_action :authorize_user
+  before_action :authorize_user, only: [:update, :destroy]
  
   # GET /purchases
   def index

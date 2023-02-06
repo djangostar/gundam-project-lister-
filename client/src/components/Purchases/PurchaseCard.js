@@ -1,10 +1,10 @@
 import React, { useContext, useState } from 'react';
 import { UserContext } from '../../context/user';
-import { useNavigate } from 'react-router-dom'
+
 
 const PurchaseCard = ({ purchase, gundam }) => {
   const { patchPurchase, destroyPurchase } = useContext(UserContext);
-  const navigate = useNavigate()
+ 
 
   const [editing, setEditing] = useState(false);
   const [price, setPrice] = useState(purchase.price);
@@ -36,7 +36,7 @@ const PurchaseCard = ({ purchase, gundam }) => {
           maxWidth: '200px',
         }}
       >
-        {gundam && gundam.name}
+        <p><strong>{gundam && gundam.name}</strong></p>
         <img src={gundam && gundam.img_url} alt="gundam_pic" />
         <br />
         <p><strong>Series: {gundam && gundam.model_series}</strong></p>
