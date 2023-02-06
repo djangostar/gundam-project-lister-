@@ -122,8 +122,49 @@ function UserProvider({ children }) {
   //   setGundams(updatedGundams)
   // }
   
+  const patchPurchase = (id, price) => {
+    fetch(`/purchases/${id}`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ price }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.error) {
+          console.log('error');
+          return;
+        }
+        editPurchase(data);
+      });
+  };
+
+  const editPurchase = (purchase) => {
+    const newPurchases = purchases.map((p) => {
+      if (p.id === purchase.id) {
+        return purchase;
+      } else {
+        return p;
+      }
+    });
+    setPurchases(newPurchases);
+  };
+
+  const destroyPurchase = (id) => {
+    fetch(`/purchases/${id}`, {
+      method: 'DELETE',
+    });
+    deletePurchase(id);
+  };
+
+  const deletePurchase = (id) => {
+    const newPurchases = purchases.filter((p) => p.id !== id);
+    setPurchases(newPurchases);
+  };
+
   return (
-    <UserContext.Provider
+<UserContext.Provider
       value={{
         user,
         gundams,
@@ -135,6 +176,9 @@ function UserProvider({ children }) {
         ctxSetUserAndLogin,
         addGundam,
         purchaseGundam,
+        patchPurchase,
+        destroyPurchase,
+        setPurchases,
         // updateGundam,
         // deleteGundam
       }}

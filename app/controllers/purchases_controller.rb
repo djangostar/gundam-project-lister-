@@ -28,9 +28,9 @@ class PurchasesController < ApplicationController
   end
 
   def update
-    purchase = Purchase.where(id: params[:id])
-    purchase.update(purchase_params)
-    render json: purchase
+    purchase = Purchase.find_by(id: params[:id])
+    purchase.update(patch_params)
+    render json: purchase, status: :ok
   end
 
   def destroy
@@ -48,7 +48,7 @@ class PurchasesController < ApplicationController
     params.permit(:price, :gundam_id, :user_id )
   end
 
-  # def view_params
-  #   params.permit(:user_id)
-  # end
+  def patch_params
+    params.permit(:price, :id )
+  end
 end

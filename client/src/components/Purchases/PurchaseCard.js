@@ -1,7 +1,20 @@
-import React from 'react';
+import React, { useContext, useState } from 'react';
+import { UserContext } from '../../context/user';
+import { useNavigate } from 'react-router-dom'
 
 const PurchaseCard = ({ purchase, gundam }) => {
-  
+  const { patchPurchase, destroyPurchase } = useContext(UserContext);
+  const navigate = useNavigate()
+
+  const [editing, setEditing] = useState(false);
+  const [price, setPrice] = useState(purchase.price);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    patchPurchase(purchase.id, price);
+    setEditing(false);
+  };
+
   return (
     <div
       style={{
@@ -24,9 +37,24 @@ const PurchaseCard = ({ purchase, gundam }) => {
         }}
       >
         {gundam && gundam.name}
-        <img src={gundam && gundam.img_url} alt='gundam_pic' />
-        {purchase.price}
+        <img src={gundam && gundam.img_url} alt="gundam_pic" />
         <br />
+        <p><strong>Series: {gundam && gundam.model_series}</strong></p>
+        <p><strong>Model Grade: {gundam && gundam.grade}</strong></p>
+        <p><strong>Year: {gundam && gundam.year}</strong></p>
+
+        {editing ? (
+          <form onSubmit={handleSubmit}>
+            <input type="text" value={price} 
+            onChange={(e) => setPrice(e.target.value)}
+            />
+            <button type="submit">Submit</button>
+          </form>
+        ) : (
+          <p><strong>Purchase Price: {purchase.price}</strong></p>
+        )}
+        <button onClick={() => setEditing(true)}>Edit</button>
+        <button onClick={() => destroyPurchase(purchase.id)}>Delete</button>
       </div>
     </div>
   );
