@@ -21,8 +21,6 @@ const ReviewForm = () => {
     navigate('/');
   };
 
-  // const reviewHero = heroes.map(hero => hero.alias)
-
   return (
     <div>
       <form onSubmit={handleSubmit}>

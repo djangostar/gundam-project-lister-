@@ -5,10 +5,6 @@ import PurchaseList from '../Purchases/PurchaseList'
 const Home = () => {
   const { user, isLoggedIn } = useContext(UserContext);
 
-//  useEffect(() => {
- //  console.log(user, isLoggedIn );
- //}, [user, isLoggedIn]);
-
   const loggedInDisplay = (
     <div>
       <h1>{user && user.username}'s Page</h1>

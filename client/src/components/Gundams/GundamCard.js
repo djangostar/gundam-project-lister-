@@ -1,35 +1,9 @@
 import React from 'react';
-// import { UserContext } from '../../context/user';
 import { useNavigate } from 'react-router-dom';
 
 const GundamCard = ({ gundam }) => {
-  // const { deleteGundam } = useContext(UserContext);
 
   const navigate = useNavigate();
-
-  // const destroyGundam = (id) => {
-  //   fetch(`/gundams/${id}`, {
-  //     method: 'DELETE',
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //     },
-  //   })
-  //     .then((res) => {
-  //       if (!res.ok) {
-  //         throw new Error(res.statusText);
-  //       }
-  //       return res.json();
-  //     })
-  //     .then((data) => {
-  //       console.log(data);
-  //       deleteGundam(id);
-  //     })
-  //     .catch((error) => {
-  //       console.error(error);
-  //     });
-  // };
-
- 
 
   return (
     <div

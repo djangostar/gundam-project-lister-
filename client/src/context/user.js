@@ -11,7 +11,6 @@ function UserProvider({ children }) {
 
   useEffect(() => {
     if (user.id) {
-      // change this to a try catch block and use async await
       fetch(`/purchases/${user.id}`)
         .then((res) => res.json())
         .then((data) => {
@@ -92,36 +91,6 @@ function UserProvider({ children }) {
       });
   };
 
-  // const updateGundam = (gundam) => {
-  //   fetch(`/gundams/${gundam.id}`, {
-  //     method: 'PATCH',
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //     },
-  //     body: JSON.stringify(gundam),
-  //   })
-  //     .then((res) => res.json())
-  //     .then((data) => {
-  //       patchGundam(data);
-  //     });
-  // }
-
-  // const patchGundam = (patchedGundam) => {
-  //   const updateGundams = gundams.map(gundam => {
-  //     if (gundam.id === patchedGundam.id) {
-  //       return patchedGundam
-  //     } else {
-  //       return gundam
-  //     }
-  //   })
-  //   setGundams(updateGundams)
-  // }
-
-  // const deleteGundam = (id) => {
-  //   const updatedGundams = gundams.filter(gundam => gundam.id !== id)
-  //   setGundams(updatedGundams)
-  // }
-  
   const patchPurchase = (id, price) => {
     fetch(`/purchases/${id}`, {
       method: 'PATCH',
